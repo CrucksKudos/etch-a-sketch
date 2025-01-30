@@ -27,7 +27,14 @@ function removeGrid() {
       }
 }
 
-
+function clearGrid() {
+    const children = document.querySelectorAll("div");
+    const arrayChildren = Array.from(children);
+    arrayChildren.forEach(function(item){
+        item.style.backgroundColor = "white"
+        console.log(item)
+    })
+}
 
 const container = document.querySelector(".container");
 
@@ -35,20 +42,28 @@ let squaresPerSide = 16;
 
 makeGrid(squaresPerSide)
 
-console.log(squaresPerSide)
+const buttonDefineSize = document.createElement("button");
 
-const button = document.createElement("button");
+document.body.appendChild(buttonDefineSize)
 
-document.body.appendChild(button)
+buttonDefineSize.textContent = "Click here to define Squares per Side"
 
-button.textContent = "Click here to define Squares per Side"
-
-button.addEventListener("click", () => {
+buttonDefineSize.addEventListener("click", () => {
     do {
         squaresPerSide = prompt("Number of Squares per Side:")
     }
     while (squaresPerSide < 0 || squaresPerSide > 100)
     removeGrid();
     makeGrid(squaresPerSide)
+})
+
+const buttonClean = document.createElement("button");
+
+document.body.appendChild(buttonClean)
+
+buttonClean.textContent = "Click here to clean"
+
+buttonClean.addEventListener("click", () => {
+    clearGrid();
 })
 
