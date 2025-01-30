@@ -1,16 +1,18 @@
+const container = document.querySelector(".container");
+
 function makeGrid(squaresPerSide) {
     for (let i = 0; i < squaresPerSide * squaresPerSide; i++) {
 
         const square = document.createElement("div");
 
         square.className = 'squares'
-        
-        square.dataset.opacity = 0;
 
         container.appendChild(square);
         
         square.style.height = (800/squaresPerSide) + "px"
         square.style.width = (800/squaresPerSide) + "px";
+
+        square.dataset.opacity = 0;
 
         square.addEventListener("mouseover", () => {
             
@@ -24,8 +26,7 @@ function makeGrid(squaresPerSide) {
                 opacity += 10;
                 square.dataset.opacity = opacity;
             }
-            console.log(opacity);
-            
+                        
             square.style.backgroundColor = "rgba(" + randomColors[0] + " " + randomColors[1] + " " + randomColors[2] + " / " + opacity + "%)";
         })
 }
@@ -34,7 +35,7 @@ function makeGrid(squaresPerSide) {
 function removeGrid() {
     while (container.hasChildNodes()) {
         container.removeChild(container.firstChild);
-      }
+    }
 }
 
 function clearGrid() {
@@ -45,35 +46,30 @@ function clearGrid() {
     })
 }
 
-const container = document.querySelector(".container");
-
+//Beginning of the Code 
 let squaresPerSide = 16;
-
-
-makeGrid(squaresPerSide)
+makeGrid(squaresPerSide);
 
 const buttonDefineSize = document.createElement("button");
-
-document.body.appendChild(buttonDefineSize)
-
-buttonDefineSize.textContent = "Click here to define Squares per Side"
-
-buttonDefineSize.addEventListener("click", () => {
-    do {
-        squaresPerSide = prompt("Number of Squares per Side:")
-    }
-    while (squaresPerSide < 0 || squaresPerSide > 100 || squaresPerSide == "")
-    removeGrid();
-    makeGrid(squaresPerSide)
-})
-
 const buttonClean = document.createElement("button");
 
+document.body.appendChild(buttonDefineSize)
 document.body.appendChild(buttonClean)
 
+buttonDefineSize.textContent = "Click here to define Squares per Side"
 buttonClean.textContent = "Click here to clean"
 
-buttonClean.addEventListener("click", () => {
-    clearGrid();
+buttonDefineSize.addEventListener("click", () => {
+    let newSize;
+    do {
+        newSize = prompt("Number of Squares per Side:")
+        if (newSize === null) return;
+    }
+    while (isNaN(newSize) || newSize < 1 || newSize > 100);
+    removeGrid();
+    makeGrid(newSize)
 })
+
+buttonClean.addEventListener("click", clearGrid)
+
 
