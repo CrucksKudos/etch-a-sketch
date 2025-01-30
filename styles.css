@@ -16,7 +16,7 @@ body {
     box-sizing: content-box;
 }
 
-div {
+.squares{
     border: 1px solid black;
     box-sizing: border-box;
 }
