@@ -27,23 +27,20 @@ function makeGrid(squaresPerSide) {
                 square.dataset.opacity = opacity;
             }
                         
-            square.style.backgroundColor = "rgba(" + randomColors[0] + " " + randomColors[1] + " " + randomColors[2] + " / " + opacity + "%)";
+            square.style.backgroundColor = `rgba(${randomColors[0]}, ${randomColors[1]}, ${randomColors[2]}, ${opacity / 100})`;
         })
 }
 }
 
 function removeGrid() {
-    while (container.hasChildNodes()) {
-        container.removeChild(container.firstChild);
-    }
+    container.innerHTML = "";
 }
 
 function clearGrid() {
-    const children = document.querySelectorAll(".squares");
-    const arrayChildren = Array.from(children);
-    arrayChildren.forEach(function(item){
-        item.style.backgroundColor = "white"
-    })
+    document.querySelectorAll(".squares").forEach(item => {
+        item.style.backgroundColor = "white"; 
+        item.dataset.opacity = 0;
+    });
 }
 
 //Beginning of the Code 
